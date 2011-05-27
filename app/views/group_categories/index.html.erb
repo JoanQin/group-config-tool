@@ -1,0 +1,22 @@
+<h1>Listing Group Categories</h1>
+<p><font color="red"><%= notice %></font></p>
+<table border="1" width="30%">
+  <tr>
+    <th width="70%">Name</th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @group_categories.each do |group_category| %>
+  <tr class="node <%= cycle("even", "odd")%>">
+    <td><%= group_category.name %></td>
+   
+    <td><%= link_to 'Edit', edit_group_category_path(group_category) %></td>
+    <td><%= link_to 'Destroy', group_category, :confirm => 'Are you sure?', :method => :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= button_to 'Add', new_group_category_path, :method=>"get" %>
