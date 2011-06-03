@@ -1,4 +1,6 @@
 GroupConfig::Application.routes.draw do
+  resources :groups
+
   resources :group_categories
 
   # The priority is based upon order of creation:
