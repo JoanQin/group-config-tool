@@ -18,7 +18,7 @@
   <div class="field">
     <%= f.label :category_id %><br />
    	<!--- <%= f.text_field :category_id %> -->
-	<% group_category = GroupCategory.all.map{ |g| [g.name, g.id]} %>
+	<% group_category = GroupCategory.all.map{ |g| [g.category_name, g.id]} %>
 	<%= select(:group, :category_id, options_for_select(group_category)) %>	
   </div>
   <div class="field">

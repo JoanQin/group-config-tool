@@ -9,7 +9,7 @@
 
 <% @group_categories.each do |group_category| %>
   <tr class="node <%= cycle("even", "odd")%>">
-    <td><%= group_category.name %></td>
+    <td><%= group_category.category_name %></td>
    
     <td><%= link_to 'Edit', edit_group_category_path(group_category) %></td>
     <td><%= link_to 'Destroy', group_category, :confirm => 'Are you sure?', :method => :delete %></td>

@@ -12,6 +12,6 @@ class Group < ActiveRecord::Base
       scoped
     end
   end
-  
+   
   
 end
