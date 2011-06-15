@@ -1,4 +1,8 @@
 GroupConfig::Application.routes.draw do
+  get "group_tool/index"
+
+  resources :group_nestings
+
   resources :groups
 
   resources :group_categories
@@ -52,7 +56,7 @@ GroupConfig::Application.routes.draw do
 
   # You can have the root of your site routed with "root"
   # just remember to delete public/index.html.
-  # root :to => "welcome#index"
+  root :to => 'group_tool#index', :as=>'group_tool'
 
   # See how all your routes lay out with "rake routes"
 

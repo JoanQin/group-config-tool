@@ -1,0 +1,15 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Parent:</b>
+  <%= @group_nesting.parent_id %>
+</p>
+
+<p>
+  <b>Group:</b>
+  <%= @group_nesting.group_id %>
+</p>
+
+
+<%= link_to 'Edit', edit_group_nesting_path(@group_nesting) %> |
+<%= link_to 'Back', group_nestings_path %>

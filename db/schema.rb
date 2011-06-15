@@ -10,10 +10,18 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110527193958) do
+ActiveRecord::Schema.define(:version => 20110613201138) do
 
   create_table "group_categories", :force => true do |t|
-    t.string   "name"
+    t.string   "category_name"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "order_by"
+  end
+
+  create_table "group_nestings", :force => true do |t|
+    t.integer  "parent_id"
+    t.integer  "group_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -21,9 +29,10 @@ ActiveRecord::Schema.define(:version => 20110527193958) do
   create_table "groups", :force => true do |t|
     t.string   "name"
     t.integer  "category_id"
-    t.integer  "department_id"
+    t.integer  "Old_department_id1"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.text     "department_id"
   end
 
 end

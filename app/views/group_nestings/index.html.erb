@@ -1,0 +1,28 @@
+
+<h1>Listing Nested Groups</h1>
+
+<table border=1>
+  <tr>
+    <th>Name</th>
+    <th>Category</th>
+    <th>Department</th>
+   
+  </tr>
+
+<% @group_nestings.each do |group_nesting| %>
+  <tr class="node <%= cycle("even", "odd")%>" onclick="getNesting(<%= group_nesting.id %>, this)">
+    <td><%= group_nesting.name %></td>
+    <td><%= GroupCategory.find_by_id(group_nesting.category_id).category_name%></td>
+    <td><%= group_nesting.department_id %></td>
+   
+    
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= button_to 'Add',  :method=>"get", :onclick=>'addNewNestings()', :remote=>true %>
+
+<p><%= will_paginate @groups %></p>
+

@@ -2,7 +2,7 @@ class GroupCategoriesController < ApplicationController
   # GET /group_categories
   # GET /group_categories.xml
   def index
-    @group_categories = GroupCategory.all
+    @group_categories = GroupCategory.find(:all, :order=>"order_by")
 
     respond_to do |format|
       format.html # index.html.erb

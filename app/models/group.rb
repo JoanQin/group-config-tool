@@ -1,5 +1,6 @@
 class Group < ActiveRecord::Base
-  belongs_to :group_category
+  has_one :group_category
+
   
   def self.search(search, sort, direction)
     if search
@@ -13,5 +14,5 @@ class Group < ActiveRecord::Base
     end
   end
    
-  
+
 end
