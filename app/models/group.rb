@@ -1,6 +1,5 @@
 class Group < ActiveRecord::Base
   has_one :group_category
-
   
   def self.search(search, sort, direction)
     if search

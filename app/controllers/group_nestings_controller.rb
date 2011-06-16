@@ -29,7 +29,7 @@ class GroupNestingsController < ApplicationController
     @group_nesting = GroupNesting.new
 
     respond_to do |format|
-      format.html # new.html.erb
+      format.html #new.html.erb
       format.xml  { render :xml => @group_nesting }
     end
   end
@@ -83,7 +83,6 @@ class GroupNestingsController < ApplicationController
     end
   end
   
-  
   private
   
   def sort_column
@@ -94,5 +93,5 @@ class GroupNestingsController < ApplicationController
     %w[asc desc].include?(params[:direction]) ? params[:direction] : "asc"
   end
   
- 
+  
 end

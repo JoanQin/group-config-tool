@@ -1,6 +1,8 @@
 class GroupCategoriesController < ApplicationController
   # GET /group_categories
   # GET /group_categories.xml
+  
+  helper_method :sort_column, :sort_direction
   def index
     @group_categories = GroupCategory.find(:all, :order=>"order_by")
 
@@ -79,5 +81,21 @@ class GroupCategoriesController < ApplicationController
       format.html { redirect_to(group_categories_url, :notice => 'Group category was successfully deleted.') }
       format.xml  { head :ok }
     end
+  end
+  
+  def view
+    @groups = Group.find(:all, :conditions=>["category_id in (?)", params[:id]]).paginate(:per_page=> 20, :page=>params[:page], :order=>(sort_column + " " + sort_direction))
+    
+  
+  end
+  
+  private
+  
+  def sort_column
+    Group.column_names.include?(params[:sort]) ? params[:sort] : "name"
+  end
+  
+  def sort_direction
+    %w[asc desc].include?(params[:direction]) ? params[:direction] : "asc"
   end
 end

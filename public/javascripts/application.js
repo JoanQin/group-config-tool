@@ -3,12 +3,26 @@
 
 var excludeGrp = 0;
 var addNestGrp = 0;
-function onload(){
+jQuery.ajaxSetup({
+	'beforeSend': function(xhr){xhr.setRequestHeader("Accept", "text/javascript")}
+})
+
+$(document).ready(function(){
 	//alert($('#groupTb tr').length);
 	if (document.getElementById('addNesting') != null) {
 		document.getElementById('addNesting').disabled = true;
 	}
-}
+	$("#addNewNesting").click(function(){	
+		alert(addNestGrp);
+		$.ajax({
+			url: '/group_nestings/new',
+			type: 'get',
+			data: {parant_id: 24, group_id: 35},
+			success: function(){}
+		});
+		return true;
+	})
+});
 
 function showMsg(id, elem){
 	
@@ -44,9 +58,4 @@ function getNesting(nid, nelem){
 	addNestGrp = nid;
 	
 }
-function addNewNestings(){
-	alert(excludeGrp);
-	alert(addNestGrp);
-	new Ajax.Request('/group_nesting/new?' + 'parent_id=3&'  + 'group_id=5' );
-	
-}
+

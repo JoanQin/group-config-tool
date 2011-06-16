@@ -22,7 +22,7 @@
 
 <br />
 
-<%= button_to 'Add',  :method=>"get", :onclick=>'addNewNestings()', :remote=>true %>
+<%= button_to 'Add Nested Group', groups_path,  :method=>"get", :id=>"addNewNesting"  %>
 
 <p><%= will_paginate @groups %></p>
 
