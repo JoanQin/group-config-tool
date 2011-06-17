@@ -88,6 +88,29 @@ class GroupsController < ApplicationController
     end
   end
   
+  # it will show all the groups by a given category id
+  def viewByCategory
+    @groups = Group.find(:all, :conditions=>["category_id in (?)", params[:id]]).paginate(:per_page=> 20, :page=>params[:page], :order=>(sort_column + " " + sort_direction))
+ 
+  end
+  
+  #it will show all the nested group under the given group id
+  def viewNestGroup
+    idstr = []
+    @nestingroups = GroupNesting.findNestedGroups(params[:id])
+    idstr[0] = params[:id] 
+    while @nestingroups.count > 0
+      idstr2 = []
+      for nid in @nestingroups
+        idstr << nid.group_id
+        idstr2 << nid.group_id
+      end
+      @nestingroups = GroupNesting.findNestedGroups(idstr2)
+    end
+    
+    @totalnesting = GroupNesting.findNestedGroups(idstr)
+  end
+  
   private
   
   def sort_column

@@ -13,12 +13,12 @@ GroupConfig::Application.routes.draw do
   # Sample of regular route:
   #   match 'products/:id' => 'catalog#view'
   # Keep in mind you can assign values other than :controller and :action
-  match 'groups/categories/:id' => 'group_categories#view'
+  match 'groups/categories/:id' => 'groups#viewByCategory'
 
   # Sample of named route:
   #   match 'products/:id/purchase' => 'catalog#purchase', :as => :purchase
   # This route can be invoked with purchase_url(:id => product.id)
-
+  match 'groups/:id/nestgroups' => 'groups#viewNestGroup', :as => :viewNestGroup
   # Sample resource route (maps HTTP verbs to controller actions automatically):
   #   resources :products
 

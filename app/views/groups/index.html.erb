@@ -25,7 +25,7 @@
 			
 			<% @groups.each do |group| %>
 			  <tr class="node <%= cycle("even", "odd")%>" onclick="showMsg(<%= group.id%>, this)">
-			    <td><%= group.name %></td>
+			    <td><%= link_to (group.name), viewNestGroup_path(group) %></td>
 			    <td><%= GroupCategory.find_by_id(group.category_id).category_name%></td>
 			    <td><%= group.department_id %></td>
 			   
@@ -42,6 +42,7 @@
 			<p><%= will_paginate @groups %></p>
 		</td>
 		<td valign="top">
+			
 			<h1>Listing Nested Groups</h1>
 
 			<table border=1>
@@ -52,7 +53,7 @@
 			    <th></th>
 			    <th></th>
 			  </tr>
-			
+			<div id="#nestings">
 			<% @group_nestings.each do |group_nesting| %>
 			  <tr>
 			    <td><%= group_nesting.parent_id %></td>
@@ -62,12 +63,13 @@
 			    <td><%= link_to 'Destroy', group_nesting, :confirm => 'Are you sure?', :method => :delete %></td>
 			  </tr>
 			<% end %>
+			</div>
 			</table>
 			
 			<br />
 			
-			<%= button_to 'Add', group_nestings_path, :method=>"get", :disabled=>true, :id=>'addNesting', :onclick=>"exGroup()" %>
-			
+			<!--<%= button_to 'Add', group_nestings_path, :method=>"get", :disabled=>true, :id=>'addNesting', :onclick=>"exGroup()" %>-->
+			<%= button_to 'Add', new_group_nesting_path, :method=>"get", :disabled=>true, :id=>"addNesting", :onclick=>"exGroup()"%>
 		</td>
 	</tr>
 </table>

@@ -1,0 +1,19 @@
+<h1>View Groups By Category</h1>
+<table border=1 >
+	<tr>
+		<th>Name</th>
+		<th>Category</th>
+		<th>Department</th>
+	</tr>
+
+	<% @groups.each do |group| %>
+	  <tr class="node <%= cycle("even", "odd")%>" >
+	    <td><%= group.name %></td>
+	    <td><%= GroupCategory.find_by_id(group.category_id).category_name%></td>
+	    <td><%= group.department_id %></td>
+	   
+	  </tr>
+	<% end %>
+</table>
+
+<p><%= will_paginate @groups %></p>

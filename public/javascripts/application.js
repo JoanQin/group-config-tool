@@ -44,8 +44,7 @@ function showMsg(id, elem){
 	
 	alert(id);
 	document.getElementById('addNesting').disabled = false;
-
-
+	
 }
 
 function exGroup(){

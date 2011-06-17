@@ -1,0 +1,17 @@
+<h1>View Nested Groups By Group</h1>
+<table border=1 >
+	<tr>
+		<th>Name</th>
+		<th>Category</th>
+		<th>Department</th>
+	</tr>
+
+	<% @totalnesting.each do |nesting| %>
+	  <tr class="node <%= cycle("even", "odd")%>" >
+	    <!--<td><%= nesting.parent_id %></td>-->
+	    <td><%= Group.find(nesting.group_id).name %></td>
+	 	<td><%= GroupCategory.find(Group.find(nesting.group_id).category_id).category_name %></td>
+		<td><%= Group.find(nesting.group_id).department_id %></td>
+	  </tr>
+	<% end %>
+</table>
