@@ -1,17 +1,71 @@
-<h1>View Nested Groups By Group</h1>
-<table border=1 >
+<table>
 	<tr>
-		<th>Name</th>
-		<th>Category</th>
-		<th>Department</th>
+		<td>
+			<td>
+			<h1>Listing groups</h1>
+			<p><font color="red"><%= notice %></font></p>
+			
+			<%= form_tag groups_path, :method=>'get' do %>
+				<%= hidden_field_tag :direction, params[:direction] %>
+				<%= hidden_field_tag :sort, params[:sort] %>
+				<p>
+					<%= text_field_tag :search, params[:search] %>
+					<%= submit_tag "Search", :name=>nil %>
+				</p>
+				
+			<% end %>
+			
+			<table border=1 id="groupTb">
+			  <tr>
+			    <th><%= sortable "name" %></th>
+			    <th><%= sortable "category_id", "Category" %></th>
+			    <th><%= sortable "department_id", "Department" %></th>
+			    <th></th>
+			    <th></th>
+			  </tr>
+			
+			<% @groups.each do |group| %>
+			  <tr class="node <%= cycle("even", "odd")%>" onclick="showMsg(<%= group.id%>, this)">
+			    <td><%= link_to (group.name), viewNestGroup_path(group) %></td>
+			    <td><%= GroupCategory.find_by_id(group.category_id).category_name%></td>
+			    <td><%= group.department_id %></td>
+			   
+			    <td><%= link_to 'Edit', edit_group_path(group) %></td>
+			    <td><%= link_to 'Destroy', group, :confirm => 'Are you sure?', :method => :delete %></td>
+			  </tr>
+			<% end %>
+			</table>
+			
+			<br />
+			
+			<%= button_to 'Add', new_group_path, :method=>"get" %>
+			
+			<p><%= will_paginate @groups %></p>
+		</td>
+		</td>
+		<td valign="top">
+			<h1>View Nested Groups By Group</h1>
+			<table  border=1 >				
+				<tr>
+					<th>Name</th>
+					<th>Category</th>
+					<th>Department</th>
+				</tr>
+			
+				<% @totalnesting.each do |nesting| %>
+				  <tr class="node <%= cycle("even", "odd")%>" >
+				    <!--<td><%= nesting.parent_id %></td>-->
+				    <td><%= Group.find(nesting.group_id).name %></td>
+				 	<td><%= GroupCategory.find(Group.find(nesting.group_id).category_id).category_name %></td>
+					<td><%= Group.find(nesting.group_id).department_id %></td>
+				  </tr>
+				<% end %>
+			</table>
+			<%= form_tag new_group_nesting_path, :method=>'get' do%>
+				<%= hidden_field_tag :parent_group %>
+			<!--<%= button_to 'Add', group_nestings_path, :method=>"get", :disabled=>true, :id=>'addNesting', :onclick=>"exGroup()" %>-->
+				<%= submit_tag 'Add',  :disabled=>true, :id=>"addNesting", :onclick=>"storeParentID()", :name=>"addNesting" %>
+			<% end %>
+		</td>
 	</tr>
-
-	<% @totalnesting.each do |nesting| %>
-	  <tr class="node <%= cycle("even", "odd")%>" >
-	    <!--<td><%= nesting.parent_id %></td>-->
-	    <td><%= Group.find(nesting.group_id).name %></td>
-	 	<td><%= GroupCategory.find(Group.find(nesting.group_id).category_id).category_name %></td>
-		<td><%= Group.find(nesting.group_id).department_id %></td>
-	  </tr>
-	<% end %>
 </table>

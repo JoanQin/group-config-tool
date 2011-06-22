@@ -26,7 +26,9 @@ class GroupNestingsController < ApplicationController
   # GET /group_nestings/new
   # GET /group_nestings/new.xml
   def new
-    @group_nesting = GroupNesting.new
+
+    @group_nestings = Group.find(:all, :conditions=>["id not in(?)", (params[:parent_group])]).paginate(:per_page=> 20, :page=>params[:page], :order=>(sort_column + " " + sort_direction))
+    @group_nesting = GroupNesting.new(:parent_id => params[:parent_group])
 
     respond_to do |format|
       format.html #new.html.erb
@@ -82,6 +84,8 @@ class GroupNestingsController < ApplicationController
       format.xml  { head :ok }
     end
   end
+  
+  
   
   private
   

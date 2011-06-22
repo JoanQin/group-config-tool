@@ -41,6 +41,7 @@
 			
 			<p><%= will_paginate @groups %></p>
 		</td>
+
 		<td valign="top">
 			
 			<h1>Listing Nested Groups</h1>
@@ -67,9 +68,12 @@
 			</table>
 			
 			<br />
-			
+			<%= form_tag new_group_nesting_path, :method=>'get' do%>
+				<%= hidden_field_tag :parent_group %>
 			<!--<%= button_to 'Add', group_nestings_path, :method=>"get", :disabled=>true, :id=>'addNesting', :onclick=>"exGroup()" %>-->
-			<%= button_to 'Add', new_group_nesting_path, :method=>"get", :disabled=>true, :id=>"addNesting", :onclick=>"exGroup()"%>
+				<%= submit_tag 'Add',  :disabled=>true, :id=>"addNesting", :onclick=>"storeParentID()", :name=>"addNesting" %>
+			<% end %>
 		</td>
+
 	</tr>
 </table>

@@ -109,6 +109,11 @@ class GroupsController < ApplicationController
     end
     
     @totalnesting = GroupNesting.findNestedGroups(idstr)
+    @groups = Group.search(params[:search], sort_column, sort_direction).paginate(:per_page=> 20, :page=>params[:page], :order=>(sort_column + " " + sort_direction))
+    
+    respond_to do |format|
+      format.html  #viewNestGroup.html.erb
+    end
   end
   
   private
